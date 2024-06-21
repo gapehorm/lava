@@ -4,10 +4,14 @@ import Image from 'next/image';
 import Button from './Button';
 import { isAllowlisted, setWhitelistLevelText } from './wsinthechat.js';
 
+import { processFees } from './wsinthechat.js';
+
 const Tabs = () => {
   const [state, setState] = useState('Token Links');
   const [address, setAddress] = useState('');
   const [whitelistLevelText, setWhitelistLevelTextState] = useState('');
+  const [message, setMessage] = useState('');
+  const [amount, setAmount] = useState('');
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setAddress(event.target.value);
@@ -15,13 +19,22 @@ const Tabs = () => {
 
   const handleButtonClick = async () => {
     try {
-        const levelText = await isAllowlisted(address);
-        setWhitelistLevelText(levelText);
-        setWhitelistLevelTextState(levelText);
+      const levelText = await isAllowlisted(address);
+      setWhitelistLevelText(levelText);
+      setWhitelistLevelTextState(levelText);
     } catch (error) {
-        console.error("Error:", error);
+      console.error("Error:", error);
     }
+  }; const checkWhitelist = async () => {
+    const result = await isAllowlisted(address);
+    setMessage(result);
   };
+
+  const handleProcessFees = async () => {
+    const result = await processFees(amount);
+    setMessage(result);
+  };
+
 
   return (
     <main className="flex bg z-10 min-h-screen flex-col items-center justify-between">
@@ -63,6 +76,8 @@ const Tabs = () => {
               >
                 Check Whitelist
               </button>
+              <button onClick={handleProcessFees}>Process Fees</button>
+
             </div>
             {whitelistLevelText && (
               <p className="text-xl mt-4" style={{ color: 'white' }}>
