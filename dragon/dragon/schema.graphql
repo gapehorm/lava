@@ -1,0 +1,119 @@
+type Approval @entity(immutable: true) {
+  id: Bytes!
+  owner: Bytes! # address
+  spender: Bytes! # address
+  value: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type AvaxWithdraw @entity(immutable: true) {
+  id: Bytes!
+  to: Bytes! # address
+  amount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type EIP712DomainChanged @entity(immutable: true) {
+  id: Bytes!
+
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ExcludeFromFees @entity(immutable: true) {
+  id: Bytes!
+  userExcluded: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type IncludeInFees @entity(immutable: true) {
+  id: Bytes!
+  userIncluded: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type NFTWithdraw @entity(immutable: true) {
+  id: Bytes!
+  to: Bytes! # address
+  ID: BigInt! # uint256
+  token: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type OwnershipTransferred @entity(immutable: true) {
+  id: Bytes!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ProcessFees @entity(immutable: true) {
+  id: Bytes!
+  user: Bytes! # address
+  dragonTokensProcessed: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type SettingsChanged @entity(immutable: true) {
+  id: Bytes!
+  user: Bytes! # address
+  setting: String! # string
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type SwapAndLiquify @entity(immutable: true) {
+  id: Bytes!
+  dragonIntoLiquidity: BigInt! # uint256
+  tokenBIntoLiquidity: BigInt! # uint256
+  tokenB: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type TokenApproved @entity(immutable: true) {
+  id: Bytes!
+  spender: Bytes! # address
+  amount: BigInt! # uint256
+  token: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type TokenWithdraw @entity(immutable: true) {
+  id: Bytes!
+  to: Bytes! # address
+  amount: BigInt! # uint256
+  token: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Transfer @entity(immutable: true) {
+  id: Bytes!
+  from: Bytes! # address
+  to: Bytes! # address
+  value: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

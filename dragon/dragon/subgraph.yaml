@@ -1,0 +1,62 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: dragon
+    network: fuji
+    source:
+      address: "0xFe924C488C0E67aa273AaD21E31a81DAa53F68AC"
+      abi: dragon
+      startBlock: 33728229
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - AvaxWithdraw
+        - EIP712DomainChanged
+        - ExcludeFromFees
+        - IncludeInFees
+        - NFTWithdraw
+        - OwnershipTransferred
+        - ProcessFees
+        - SettingsChanged
+        - SwapAndLiquify
+        - TokenApproved
+        - TokenWithdraw
+        - Transfer
+      abis:
+        - name: dragon
+          file: ./abis/dragon.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: AvaxWithdraw(indexed address,uint256)
+          handler: handleAvaxWithdraw
+        - event: EIP712DomainChanged()
+          handler: handleEIP712DomainChanged
+        - event: ExcludeFromFees(indexed address)
+          handler: handleExcludeFromFees
+        - event: IncludeInFees(indexed address)
+          handler: handleIncludeInFees
+        - event: NFTWithdraw(indexed address,uint256,indexed address)
+          handler: handleNFTWithdraw
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: ProcessFees(indexed address,uint256)
+          handler: handleProcessFees
+        - event: SettingsChanged(indexed address,indexed string)
+          handler: handleSettingsChanged
+        - event: SwapAndLiquify(uint256,uint256,indexed address)
+          handler: handleSwapAndLiquify
+        - event: TokenApproved(indexed address,uint256,indexed address)
+          handler: handleTokenApproved
+        - event: TokenWithdraw(indexed address,uint256,indexed address)
+          handler: handleTokenWithdraw
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/dragon.ts
