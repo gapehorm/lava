@@ -190,7 +190,7 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "NftId",
+        "name": "ID",
         "type": "uint256"
       },
       {
