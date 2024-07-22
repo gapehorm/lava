@@ -3,6 +3,7 @@ import React, { useState, ChangeEvent } from 'react';
 import Image from 'next/image';
 import Button from './Button';
 import { isAllowlisted, setWhitelistLevelText } from './wsinthechat.js';
+import Link from 'next/link';
 
 const Tabs = () => {
   const [state, setState] = useState('Token Links');
@@ -15,11 +16,11 @@ const Tabs = () => {
 
   const handleButtonClick = async () => {
     try {
-        const levelText = await isAllowlisted(address);
-        setWhitelistLevelText(levelText);
-        setWhitelistLevelTextState(levelText);
+      const levelText = await isAllowlisted(address);
+      setWhitelistLevelText(levelText);
+      setWhitelistLevelTextState(levelText);
     } catch (error) {
-        console.error("Error:", error);
+      console.error("Error:", error);
     }
   };
 
@@ -27,8 +28,10 @@ const Tabs = () => {
     <main className="flex bg z-10 min-h-screen flex-col items-center justify-between">
       <div className='absolute min-w-[420px] min-h-[600px] scale-[0.6] md:scale-[1.15] bg-black/60 border-4 border-[#BA4B00] rounded-2xl p-4 px-14 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2' style={{ marginTop: '30px' }}>
         <div className='flex w-full items-center gap-5 justify-between'>
-          <button onClick={() => setState('Token Links')} className={`flex-1 transition-all duration-300 hover:bg-[#F1740Fb7] hover:text-white  text-[#A3531C] border-[3px] text-xl font-bold border-[#BA4B00] rounded-3xl mb-5 py-2 ${state === 'Token Links' ? 'bg-[#F1740F] text-white ' : ''}`}>Token Links</button>
-          <button onClick={() => setState('WL Checker')} className={`flex-1 transition-all duration-300 hover:bg-[#f1750fb7] hover:text-white  text-[#A3531C] border-[3px] text-xl font-bold border-[#BA4B00] rounded-3xl mb-5 py-2 ${state === 'WL Checker' ? 'bg-[#F1740F] text-white ' : ''}`}>WL Checker</button>
+          <button onClick={() => setState('Token Links')} className={`flex-2 transition-all duration-300 hover:bg-[#F1740Fb7] hover:text-white  text-[#A3531C] border-[3px] text-xl font-bold border-[#BA4B00] rounded-3xl mb-5 py-2 ${state === 'Token Links' ? 'bg-[#F1740F] text-white ' : ''}`}>Token Links</button>
+          <button onClick={() => setState('WL Checker')} className={`flex-2 transition-all duration-300 hover:bg-[#f1750fb7] hover:text-white  text-[#A3531C] border-[3px] text-xl font-bold border-[#BA4B00] rounded-3xl mb-5 py-2 ${state === 'WL Checker' ? 'bg-[#F1740F] text-white ' : ''}`}>WL Checker</button>
+          <Link href={'/lp'} className={`flex-1 transition-all duration-300 hover:bg-[#f1750fb7] hover:text-white  text-[#A3531C] border-[3px] text-xl font-bold border-[#BA4B00] rounded-3xl mb-5 py-2 text-center ${state === 'WL Checker' ? 'bg-[#F1740F] text-white ' : ''}`}>Liquidity Pool Burnt</Link>
+
         </div>
         {state === 'Token Links' ?
           <>
@@ -45,7 +48,8 @@ const Tabs = () => {
               <Button sitename='Example' sitelink='https://example.com' />
               <Button sitename='Example' sitelink='https://example.com' />
             </div>
-          </> :
+          </> : null}
+        {state === 'WL Checker' ?
           <div className='flex flex-col justify-center items-center text-center'>
             <div className='flex flex-col justify-center items-center text-center' style={{ marginTop: '20px' }}>
               <input
@@ -70,7 +74,8 @@ const Tabs = () => {
               </p>
             )}
           </div>
-        }
+          : null}
+
       </div>
     </main>
   );
